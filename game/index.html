@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/game.js" type="text/javascript"></script>
+    <script src="js/server.js" type="text/javascript"></script>
+</head>
+<body>
+<canvas id="game"></canvas><br>
+<input type="text" id="chat" placeholder="Chat..." maxlength="50">
+</body>
+<script>
+    canvas = document.getElementById('game');
+    canvas.width = 2400;
+    canvas.height = 1200;
+    Game.c = canvas.getContext("2d");
+    Server.service = new WebSocket('ws://127.0.0.1:2500');
+    Server.connect();
+    Game.clear(canvas.width,canvas.height);
+    do {
+        var usn = prompt("Insert username");
+    }while(usn == null);
+    Server.send("NEW " + usn); //loading check
+</script>
